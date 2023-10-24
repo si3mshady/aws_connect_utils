@@ -14,6 +14,5 @@ RUN pip install -r requirements.txt
 
 # Expose the port that Streamlit runs on
 EXPOSE 8501
-
 # Run your Streamlit app
 CMD ["streamlit", "run", "phone_number_check.py"]

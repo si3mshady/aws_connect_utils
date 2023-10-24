@@ -8,4 +8,4 @@ services:
       - "8501:8501"
     env_file:
       - .env
-    command: ["streamlit", "run", "your_script.py"]
+    command: ["streamlit", "run", "phone_number_check.py"]
