@@ -1,15 +1,18 @@
 import boto3
 from faker import Faker
 
+REGION = 'us-east-1'
+TABLE = 'phonedb'
+
 def create_dynamodb_table_if_not_exists():
-    dynamodb = boto3.resource('dynamodb', region_name='your-region')
-    table_name = 'your-dynamodb-table-name'
+    dynamodb = boto3.resource('dynamodb', region_name=REGION)
+    table_name = TABLE
 
     existing_tables = dynamodb.meta.client.list_tables()
     
     if table_name not in existing_tables['TableNames']:
         table = dynamodb.create_table(
-            TableName=table_name,
+            TableName=TABLE,
             KeySchema=[
                 {
                     'AttributeName': 'PhoneNumber',
@@ -30,8 +33,8 @@ def create_dynamodb_table_if_not_exists():
         table.wait_until_exists()
 
 def populate_dynamodb_table():
-    dynamodb = boto3.client('dynamodb', region_name='your-region')
-    table_name = 'your-dynamodb-table-name'
+    dynamodb = boto3.client('dynamodb', region_name=REGION)
+    table_name = TABLE
 
     fake = Faker()
     phone_numbers = [fake.phone_number() for _ in range(100)]
